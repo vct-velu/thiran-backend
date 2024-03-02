@@ -1,0 +1,15 @@
+{
+    "common": {
+        "number_min_value": "Should be greater or equal than {constraints.0}",
+        "is_not_number": "Is not number",
+        "is_empty_object": "Should not be empty",
+        "is_not_string": "Is not string",
+        "is_not_boolean": "Is not boolean",
+        "is_not_object": "Is not object",
+        "is_not_int": "Is not integer",
+        "is_not_enum": "Must be one of: {enumValues}"
+    },
+    "exceptions": {
+        "country_not_found": "Country code not found"
+    }
+}
