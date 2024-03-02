@@ -11,6 +11,7 @@ import {
   I18nModule,
 } from 'nestjs-i18n';
 import * as path from 'path';
+import { PurchaseModule } from './modules/purchase/purchase.module';
 
 @Module({
   imports: [
@@ -50,6 +51,7 @@ import * as path from 'path';
       imports: [ConfigModule],
       inject: [ConfigService],
     }),
+    PurchaseModule,
   ],
   providers: [],
 })
