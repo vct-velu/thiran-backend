@@ -10,7 +10,7 @@ import { MinimumCostDto } from './dto/minimum-cost.dto';
 export class PurchaseService {
   constructor() {}
 
-  calculateMinCost(purchaseIpodDto: PurchaseIpodDto): MinimumCostDto {
+  calculateMinCost(purchaseIpodDto: PurchaseIpodDto): Promise<MinimumCostDto> {
     const {
       costInIndia,
       costInSrilanka,
@@ -27,18 +27,24 @@ export class PurchaseService {
         : Math.floor(unitsOrdered / 10);
     const transportCost: number = transportBlocks * transportCostPer10Blocks;
 
-    let response: MinimumCostResponseType;
-    response.unitsLeftInIndia = 100 - unitsOrdered;
-    response.unitsLeftInSrilanka = 100 - unitsOrdered;
+    const response: MinimumCostResponseType = {
+      unitsLeftInIndia: 100,
+      unitsLeftInSrilanka: 100,
+      totalCostWithTransport: 0,
+    };
+    response.unitsLeftInIndia = 100;
+    response.unitsLeftInSrilanka = 100;
+    console.log('response :', response);
 
     if (orderFrom === CountryListEnum.INDIA) {
       response.totalCostWithTransport = totalCostSriLanka + transportCost;
-      response.unitsLeftInSrilanka -= unitsOrdered;
-      return new MinimumCostDto(response);
+      response.unitsLeftInIndia -= unitsOrdered;
     } else if (orderFrom === CountryListEnum.SRILANKA) {
       response.totalCostWithTransport = totalCostIndia + transportCost;
-      response.unitsLeftInIndia -= unitsOrdered;
-      return new MinimumCostDto(response);
+      response.unitsLeftInSrilanka -= unitsOrdered;
+    } else {
+      throw new Error('Invalid orderFrom value');
     }
+    return Promise.resolve(new MinimumCostDto(response));
   }
 }
