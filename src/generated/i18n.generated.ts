@@ -5,6 +5,17 @@
 import { Path } from "nestjs-i18n";
 /* prettier-ignore */
 export type I18nTranslations = {
+    "dto": {
+        "common": {
+            "number_min_value": string;
+            "is_not_number": string;
+            "is_empty_object": string;
+            "is_not_string": string;
+            "is_not_boolean": string;
+            "is_not_object": string;
+            "is_not_int": string;
+        };
+    };
     "dtos": {
         "common": {
             "number_min_value": string;

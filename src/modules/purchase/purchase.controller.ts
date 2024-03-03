@@ -16,7 +16,9 @@ export class PurchaseController {
 
   @Post('/calculate-min-cost')
   @HttpCode(HttpStatus.OK)
-  calculateMinCost(@Body() purchaseIpodDto: PurchaseIpodDto): MinimumCostDto {
+  calculateMinCost(
+    @Body() purchaseIpodDto: PurchaseIpodDto,
+  ): Promise<MinimumCostDto> {
     if (
       purchaseIpodDto.orderFrom !== CountryListEnum.INDIA &&
       purchaseIpodDto.orderFrom !== CountryListEnum.SRILANKA
