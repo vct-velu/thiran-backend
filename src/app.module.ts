@@ -2,9 +2,9 @@ import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
 import { configsList } from './config';
 import { LogRequestsMiddleware } from './utils/middlewares/log-requests.middleware';
 import { ConfigModule, ConfigService } from '@nestjs/config';
-import { TypeOrmModule } from '@nestjs/typeorm';
-import { TypeOrmConfigService } from './database/typeorm-config.service';
-import { DataSource } from 'typeorm';
+// import { TypeOrmModule } from '@nestjs/typeorm';
+// import { TypeOrmConfigService } from './database/typeorm-config.service';
+// import { DataSource } from 'typeorm';
 import {
   AcceptLanguageResolver,
   HeaderResolver,
@@ -20,10 +20,10 @@ import { PurchaseModule } from './modules/purchase/purchase.module';
       load: configsList,
       envFilePath: ['.env'],
     }),
-    TypeOrmModule.forRootAsync({
-      useClass: TypeOrmConfigService,
-      dataSourceFactory: (options) => new DataSource(options).initialize(),
-    }),
+    // TypeOrmModule.forRootAsync({
+    //   useClass: TypeOrmConfigService,
+    //   dataSourceFactory: (options) => new DataSource(options).initialize(),
+    // }),
     I18nModule.forRootAsync({
       useFactory: (configService: ConfigService) => ({
         fallbackLanguage: configService.get('app.fallbackLanguage'),
